@@ -15,6 +15,11 @@ int getPrivateKeys();
 /************************************************/
 /* Compression/Decompress - Run Length Encoding */
 /************************************************/
+/* To compress the given input */
+void Compress ();
+
+/* To reverse/decompress */ 
+void Decompress ();
 
 /********************************/
 /* Data Structure - Linked List */ 
