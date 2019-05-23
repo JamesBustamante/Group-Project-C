@@ -1,0 +1,104 @@
+#include<stdio.h> 
+#include<math.h> 
+#include<header.h>
+
+/*Check whether a given number is prime or not*/
+int checkPrime(int n)
+{
+	int i, j;
+	j = sqrt(n);
+	for (i=2; i<=j; i++)
+	{
+	if(n%i==0)
+		return 0;
+	}
+		
+
+/*finding the gcd*/
+int gcd(int a, int h)
+{
+	int temp;
+{
+    int temp;
+    while(1)
+    {
+        temp = a%h;
+        if(temp==0)
+        return h;
+        a = h;
+        h = temp;
+    }
+}
+ 
+/*using the RSA algorithm*/
+
+int main ()
+{
+	int p;
+	int q;
+
+	printf("\nChoose two random prime numbers p&q: ");
+	scanf("%d %d",&p,&q); 
+
+/* calculating the product and the totient*/
+	
+	int n;
+	int phi;
+
+	n=p*q;
+	phi = (p-1)*(q-1);
+
+/* selecting the e value (public key) where e = encrypt */
+
+	int e;
+
+	printf("\nChoose an e value: ");
+	scanf("%d", &e);
+
+/*making sure e satisfies the condition of 1<e<phi*/
+	while (e<phi) 
+		{
+		    if (gcd(e,phi)==1) 
+		        break; 
+		    else
+		        e++; 
+		}
+
+/*selecting d value (private key) where d = decrypt*/
+
+	int d;
+
+	printf("\nChoose a d value: ");
+	scanf("%d", &e);
+
+/*checking to see if d satisfies the condition of d*e = 1+(k*phi)*/
+
+	int k; /*k is a constant*/
+
+	printf("Choose k: ");
+	scanf("%d", &k);
+
+
+  /* don't know */
+
+void Encrypt();
+{
+	int msg;
+
+	printf("\nMessage to be encrypted: ");
+	scanf("%d", &msg);
+
+	double c = pow(msg,e);
+	c = fmod (c, n);
+	printf("\nData that's encrypted: %lf, c);
+}
+
+void Decrypt();
+{
+	double m = pow(c,d);
+	m = fmod(m, n);
+	printf("\nData decrypted (Original Message): %lf, m);
+
+int getPublicKeys();
+
+int getPrivateKeys();
