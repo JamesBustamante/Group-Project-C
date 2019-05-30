@@ -1,61 +1,67 @@
+/* FUNCTION PROTOTYPES */
+struct node searchTitle (struct node** headReference, char* target);
+struct node searchUsername (struct_node** headReference, char* target);
+struct node binarySearchTitle(struct node **headRef, char* target);
+struct node binarySearchUsername(struct node **headRef, char* target); 
+
 /* Searches for the first element in the list whos title contains */
 /*    the search text.                                            */
 /* Returns the node with the title that matches the target text.  */
 /* Returns nullptr if no match.                                   */
-struct node searchTitle (struct node** headReference, char[] target){
+struct node searchTitle (struct node** headReference, char* target){
 	struct node* currNode = *headReference;
 	
 	/* Base case (empty list). */
 	if(currNode == NULL){
-		return null;
+		return NULL;
 	} 
 	
 	/* Iterate through list. */
 	while (currNode->next == NULL){
 		/* Strstr looks for substring target in string node->title. */
 		/* If there's a match, return the node that matches.        */
-		if(strstr(currNode->title, target) != nullptr ){
+		if(strstr(currNode->title, target) != NULL ){
 			return currNode;
 		}
 		/* If there's no match, move to the next node. */
 		currNode = currNode->next;
 	}
 	/* If there were no matches in the whole list, return a nullptr. */
-	return nullptr;
+	return NULL;
 }
 
 /* Searches for the first element in the list whos username contains */
 /*    the search text.                                               */
 /* Returns the node with the title that matches the target text.     */
 /* Returns nullptr if no match.                                      */
-struct node searchUsername (struct_node** headReference, char[] target){
+struct node searchUsername (struct_node** headReference, char* target){
 	struct node* currNode = *headReference;
 	
 	/* Base case (empty list). */
 	if(currNode == NULL){
-		return null;
+		return NULL;
 	} 
 	
 	/* Iterate through list. */
 	while (currNode->next == NULL){
 		/* Strstr looks for substring target in string node->title. */
 		/* If there's a match, return the node that matches.        */
-		if(strstr(currNode->username, target) != nullptr ){
+		if(strstr(currNode->username, target) != NULL ){
 			return currNode;
 		}
 		/* If there's no match, move to the next node. */
 		currNode = currNode->next;
 	}
 	/* If there were no matches in the whole list, return a nullptr. */
-	return nullptr;
+	return NULL;
 }
 
 /* Performs a binary search to find a node based on its title.   */
 /* ALWAYS SORT LIST BEFORE USING THIS FUNCTION OR IT WON'T WORK! */
-struct node binarySearchTitle(struct node **headRef, char[] target) { 
+struct node binarySearchTitle(struct node **headRef, char* target) { 
     /* Define some start values. */
 	struct node* startNode = *headRef; 
-    struct node* lastNode = NULL;
+    	struct node* lastNode = NULL;
 	struct node* middleNode;
 	struct node* fastIndex;		
 	
@@ -99,15 +105,15 @@ struct node binarySearchTitle(struct node **headRef, char[] target) {
     }
 	/* If the Binary Search has made the same node First and Last, that means it */
 	/*   could not find the target in the list, therefore return nullptr.        */
-	return nullptr;
+	return NULL;
 }
 
 /* Performs a binary search to find a node based on its usename. */
 /* ALWAYS SORT LIST BEFORE USING THIS FUNCTION OR IT WON'T WORK! */
-struct node binarySearchUsername(struct node **headRef, char[] target) { 
+struct node binarySearchUsername(struct node **headRef, char* target) { 
     /* Define some start values. */
 	struct node* startNode = *headRef; 
-    struct node* lastNode = NULL;
+    	struct node* lastNode = NULL;
 	struct node* middleNode;
 	struct node* fastIndex;		
 	
@@ -135,7 +141,7 @@ struct node binarySearchUsername(struct node **headRef, char[] target) {
 		
 		/* Now middleNode is our halfway node, we can compare the data.              */
 		/* If the middle value contains the target as a substring, return that node. */
-		if (strstr(middleNode->username, target) != nullptr ){
+		if (strstr(middleNode->username, target) != NULL ){
 			return middleNode;
 		}
 		/* Else, if the middle node is alphabetically after the target, perform */
@@ -151,5 +157,5 @@ struct node binarySearchUsername(struct node **headRef, char[] target) {
     }
 	/* If the Binary Search has made the same node First and Last, that means it */
 	/*   could not find the target in the list, therefore return nullptr.        */
-	return nullptr;
+	return NULL;
 }  
