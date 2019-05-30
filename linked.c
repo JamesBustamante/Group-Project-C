@@ -1,12 +1,12 @@
 #define _GNU_SOURCE
+#define DB_NAME "database"
 #include <stdio.h>  /* printf, scanf */
 #include <string.h> /* strcpy, strcmp, strlen, strcat */
 #include <stdlib.h> /* malloc */
 #include <math.h>
 #include "header.h"
-#include "mergeSort.h"
-#define DB_NAME "database"
-
+#include "mergeSort.h" 
+#include "searchLinkedList.h"
 int main()
 {
     struct node *head = NULL;
@@ -14,7 +14,6 @@ int main()
     selection(&head);
     return 0;
 }
-
 
 void insertDetails(struct node **node, char *title, char *username, char *password)
 {
@@ -235,7 +234,7 @@ void selection(struct node **node){
             LoadContentsInLinkedList(node);
             break;
         case '3':
-            print_search_sort();
+            print_search_sort(node);
             break;
         case '4':
             saveLinkedList(*node);
@@ -251,3 +250,5 @@ void selection(struct node **node){
         }
     }
 }
+
+
