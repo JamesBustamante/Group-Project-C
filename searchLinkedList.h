@@ -1,8 +1,4 @@
-/* FUNCTION PROTOTYPES */
-void searchTitle (struct node** headReference, char* target);
-void searchUsername (struct node** headReference, char* target);
-void binarySearchTitle(struct node **headRef, char* target);
-void binarySearchUsername(struct node **headRef, char* target); 
+
 
 /* Searches for the first element in the list whos title contains */
 /*    the search text.                                            */
