@@ -1,33 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-
 /* Determines whether the first node is ahead of the second, alphabetically by node title. */
 /* Returns 1 if 'node1' is first, -1 if 'node2' is first, 0 if nodes have the same title.  */
-int alphabeticalOrderTitle(node_t* node1, node_t* node2);
+int alphabeticalOrderTitle(struct node* node1, struct node* node2);
+int alphabeticalOrderUsername(struct node* node1, struct node* node2);
 
 /* Merge Sort main function, recursively calls itself to sort a provided linkedlist. */
-void mergeSortMainTitle(node_t** headReference);
+void mergeSortMainTitle(struct node** headReference);
+void mergeSortMainUsername(struct node** headReference);
 
 /* Merge Sort split function, finds the mid point of an array and splits it into two. */
-void mergeSortSplitTitle(node_t* list, node_t** frontPtr, node_t** backPtr);
+void mergeSortSplitTitle(struct node* list, struct node** frontPtr, struct node** backPtr);
+void mergeSortSplitUsername(struct node* list, struct node** frontPtr, struct node** backPtr);
 
 /* Merge Sort merge function, orders elements alphabetically and merges them. */
-node_t* mergeSortMergeTitle(node_t* node1, node_t* node2);
+struct node* mergeSortMergeTitle(struct node* node1, struct node* node2);
+struct node* mergeSortMergeUsername(struct node* node1, struct node* node2);
 
-int alphabeticalOrderUsername(node_t* node1, node_t* node2);
-
-/* Merge Sort main function, recursively calls itself to sort a provided linkedlist. */
-void mergeSortMainUsername(node_t** headReference);
-
-/* Merge Sort split function, finds the mid point of an array and splits it into two. */
-void mergeSortSplitUsername(node_t* list, node_t** frontPtr, node_t** backPtr);
-
-/* Merge Sort merge function, orders elements alphabetically and merges them. */
-node_t* mergeSortMergeUsername(node_t* node1, node_t* node2);
-
-int alphabetOrderTitle (node_t* a, node_t* b) {
+int alphabetOrderTitle (struct node* a, struct node* b) {
 	char* aString = a->title;
 	char* bString = b->title;
 	int y = 0;
@@ -67,10 +55,10 @@ int alphabetOrderTitle (node_t* a, node_t* b) {
 	return 0;
 }
 
-void mergeSortMainTitle(node_t** headReference){
-	node_t* head = *headReference;
-	node_t* firstHalf;
-	node_t* lastHalf;
+void mergeSortMainTitle(struct node** headReference){
+	struct node* head = *headReference;
+	struct node* firstHalf;
+	struct node* lastHalf;
 
 	/* Check the base case (list length 0 or 1). */
 	if(head == NULL || head->next == NULL){
@@ -89,9 +77,9 @@ void mergeSortMainTitle(node_t** headReference){
 
 }
 
-void mergeSortSplitTitle(node_t* source, node_t** frontReference, node_t** backReference){
-	node_t* fastIndex = source->next;
-	node_t* slowIndex = source;
+void mergeSortSplitTitle(struct node* source, struct node** frontReference, struct node** backReference){
+	struct node* fastIndex = source->next;
+	struct node* slowIndex = source;
 
 	/* Until the fastIndex hits the end of the list... */
 	while(fastIndex != NULL){
@@ -116,8 +104,8 @@ void mergeSortSplitTitle(node_t* source, node_t** frontReference, node_t** backR
 	slowIndex->next = NULL;
 }
 
-node_t* mergeSortMergeTitle(node_t* a, node_t* b){
-	node_t* result = NULL;
+struct node* mergeSortMergeTitle(struct node* a, struct node* b){
+	struct node* result = NULL;
 
 	/* Cover base cases. */
 	if(a == NULL){
@@ -128,24 +116,23 @@ node_t* mergeSortMergeTitle(node_t* a, node_t* b){
 	}
 
 	/* Get the alphabet order int. */
-	int alphabeticalOrderVal = alphabetOrderTitle(a, b);
+	int alphabeticalOrderVal = alphabetlOrderTitle(a, b);
 
 	/* If the first string comes first, add that. */
-	if(alphabeticalOrderVal == 1){
+	if(alphabeticalOrder == 1){
 		result = a;
 		result-> next = mergeSortMergeTitle(a->next, b);
 	}
-	else if (alphabeticalOrderVal == 2){
+	else if (alphabeticalOrder == 2){
 		result = b;
 		result -> next = mergeSortMergeTitle(a, b->next);
 	}
 	return result;
-
 }
 
-int alphabetOrderUsername (node_t* a, node_t* b) {
+int alphabetOrderUsername (struct node* a, struct node* b) {
 	char* aString = a->username;
-	char* bString = b->username;
+	char* bString = b->uesrname;
 	int y = 0;
 	int j = 0;
 
@@ -183,10 +170,10 @@ int alphabetOrderUsername (node_t* a, node_t* b) {
 	return 0;
 }
 
-void mergeSortMainUsername(node_t** headReference){
-	node_t* head = *headReference;
-	node_t* firstHalf;
-	node_t* lastHalf;
+void mergeSortMainUsername(struct node** headReference){
+	struct node* head = *headReference;
+	struct node* firstHalf;
+	struct node* lastHalf;
 
 	/* Check the base case (list length 0 or 1). */
 	if(head == NULL || head->next == NULL){
@@ -205,9 +192,9 @@ void mergeSortMainUsername(node_t** headReference){
 
 }
 
-void mergeSortSplitUsername(node_t* source, node_t** frontReference, node_t** backReference){
-	node_t* fastIndex = source->next;
-	node_t* slowIndex = source;
+void mergeSortSplitUsername(struct node* source, struct node** frontReference, struct node** backReference){
+	struct node* fastIndex = source->next;
+	struct node* slowIndex = source;
 
 	/* Until the fastIndex hits the end of the list... */
 	while(fastIndex != NULL){
@@ -232,8 +219,8 @@ void mergeSortSplitUsername(node_t* source, node_t** frontReference, node_t** ba
 	slowIndex->next = NULL;
 }
 
-node_t* mergeSortMergeUsername(node_t* a, node_t* b){
-	node_t* result = NULL;
+struct node* mergeSortMergeUsername(struct node* a, struct node* b){
+	struct node* result = NULL;
 
 	/* Cover base cases. */
 	if(a == NULL){
@@ -244,14 +231,14 @@ node_t* mergeSortMergeUsername(node_t* a, node_t* b){
 	}
 
 	/* Get the alphabet order int. */
-	int alphabeticalOrderVal = alphabetOrderUsername(a, b);
+	int alphabeticalOrderVal = alphabetlOrderUsername(a, b);
 
 	/* If the first string comes first, add that. */
-	if(alphabeticalOrderVal == 1){
+	if(alphabeticalOrder == 1){
 		result = a;
 		result-> next = mergeSortMergeUsername(a->next, b);
 	}
-	else if (alphabeticalOrderVal == 2){
+	else if (alphabeticalOrder == 2){
 		result = b;
 		result -> next = mergeSortMergeUsername(a, b->next);
 	}
