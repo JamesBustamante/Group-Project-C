@@ -1,67 +1,75 @@
 /* FUNCTION PROTOTYPES */
-struct node searchTitle (struct node** headReference, char* target);
-struct node searchUsername (struct_node** headReference, char* target);
-struct node binarySearchTitle(struct node **headRef, char* target);
-struct node binarySearchUsername(struct node **headRef, char* target); 
+void searchTitle (struct node** headReference, char* target);
+void searchUsername (struct_node** headReference, char* target);
+void binarySearchTitle(struct node **headRef, char* target);
+void binarySearchUsername(struct node **headRef, char* target); 
 
 /* Searches for the first element in the list whos title contains */
 /*    the search text.                                            */
-/* Returns the node with the title that matches the target text.  */
-/* Returns nullptr if no match.                                   */
-struct node searchTitle (struct node** headReference, char* target){
+/* Prints the node with the title that matches the target text.   */
+/* Prints an error if there is no match.                          */
+void searchTitle (struct node** headReference, char* target){
 	struct node* currNode = *headReference;
 	
 	/* Base case (empty list). */
 	if(currNode == NULL){
-		return NULL;
+		printf("\n"
+	       	       "List is empty\n");;
 	} 
 	
 	/* Iterate through list. */
 	while (currNode->next == NULL){
 		/* Strstr looks for substring target in string node->title. */
-		/* If there's a match, return the node that matches.        */
+		/* If there's a match, print the node that matches.         */
 		if(strstr(currNode->title, target) != NULL ){
-			return currNode;
+			printf(fp, "%s\n", currNode->title);
+           		printf(fp, "%s\n", currNode->username);
+            		printf(fp, "%s\n", currNode->password);
 		}
 		/* If there's no match, move to the next node. */
 		currNode = currNode->next;
 	}
-	/* If there were no matches in the whole list, return a nullptr. */
-	return NULL;
+	/* If there were no matches in the whole list, print an error message. */
+	printf("\n"
+	       "Target not found\n");
 }
 
 /* Searches for the first element in the list whos username contains */
 /*    the search text.                                               */
-/* Returns the node with the title that matches the target text.     */
-/* Returns nullptr if no match.                                      */
-struct node searchUsername (struct_node** headReference, char* target){
+/* Prints the node with the title that matches the target text.      */
+/* Prints null if no match.                                          */
+void searchUsername (struct_node** headReference, char* target){
 	struct node* currNode = *headReference;
 	
 	/* Base case (empty list). */
 	if(currNode == NULL){
-		return NULL;
+		printf("\n"
+	               "List is empty\n");
 	} 
 	
 	/* Iterate through list. */
 	while (currNode->next == NULL){
 		/* Strstr looks for substring target in string node->title. */
-		/* If there's a match, return the node that matches.        */
+		/* If there's a match, print the node that matches.         */
 		if(strstr(currNode->username, target) != NULL ){
-			return currNode;
+			printf(fp, "%s\n", currNode->title);
+           		printf(fp, "%s\n", currNode->username);
+            		printf(fp, "%s\n", currNode->password);
 		}
 		/* If there's no match, move to the next node. */
 		currNode = currNode->next;
 	}
-	/* If there were no matches in the whole list, return a nullptr. */
-	return NULL;
+	/* If there were no matches in the whole list, print an error message. */
+	printf("\n"
+	       "Target not found\n");
 }
 
 /* Performs a binary search to find a node based on its title.   */
 /* ALWAYS SORT LIST BEFORE USING THIS FUNCTION OR IT WON'T WORK! */
-struct node binarySearchTitle(struct node **headRef, char* target) { 
+void binarySearchTitle(struct node **headRef, char* target) { 
     /* Define some start values. */
 	struct node* startNode = *headRef; 
-    	struct node* lastNode = NULL;
+    struct node* lastNode = NULL;
 	struct node* middleNode;
 	struct node* fastIndex;		
 	
@@ -88,9 +96,11 @@ struct node binarySearchTitle(struct node **headRef, char* target) {
 		}
 		
 		/* Now middleNode is our halfway node, we can compare the data.              */
-		/* If the middle value contains the target as a substring, return that node. */
-		if (strstr(middleNode->title, target) != nullptr ){
-			return middleNode;
+		/* If the middle value contains the target as a substring, print that node.  */
+		if (strstr(middleNode->title, target) != NULL ){
+			printf(fp, "%s\n", middleNode->title);
+           		printf(fp, "%s\n", middleNode->username);
+            		printf(fp, "%s\n", middleNode->password);
 		}
 		/* Else, if the middle node is alphabetically after the target, perform */
 		/*   a binary search on the first half of the linkedList.               */
@@ -104,16 +114,17 @@ struct node binarySearchTitle(struct node **headRef, char* target) {
 		}
     }
 	/* If the Binary Search has made the same node First and Last, that means it */
-	/*   could not find the target in the list, therefore return nullptr.        */
-	return NULL;
+	/*   could not find the target in the list, therefore print an error message.*/
+	printf("\n"
+	       "Target not found\n");
 }
 
 /* Performs a binary search to find a node based on its usename. */
 /* ALWAYS SORT LIST BEFORE USING THIS FUNCTION OR IT WON'T WORK! */
-struct node binarySearchUsername(struct node **headRef, char* target) { 
+void binarySearchUsername(struct node **headRef, char* target) { 
     /* Define some start values. */
 	struct node* startNode = *headRef; 
-    	struct node* lastNode = NULL;
+    struct node* lastNode = NULL;
 	struct node* middleNode;
 	struct node* fastIndex;		
 	
@@ -140,9 +151,11 @@ struct node binarySearchUsername(struct node **headRef, char* target) {
 		}
 		
 		/* Now middleNode is our halfway node, we can compare the data.              */
-		/* If the middle value contains the target as a substring, return that node. */
+		/* If the middle value contains the target as a substring, print that node.  */
 		if (strstr(middleNode->username, target) != NULL ){
-			return middleNode;
+			printf(fp, "%s\n", middleNode->title);
+           		printf(fp, "%s\n", middleNode->username);
+            		printf(fp, "%s\n", middleNode->password);
 		}
 		/* Else, if the middle node is alphabetically after the target, perform */
 		/*   a binary search on the first half of the linkedList.               */
@@ -156,6 +169,7 @@ struct node binarySearchUsername(struct node **headRef, char* target) {
 		}
     }
 	/* If the Binary Search has made the same node First and Last, that means it */
-	/*   could not find the target in the list, therefore return nullptr.        */
-	return NULL;
+	/*   could not find the target in the list, therefore print an error message.*/
+	printf("\n"
+	       "Target not found\n");
 }  
