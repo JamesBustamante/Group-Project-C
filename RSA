@@ -1,104 +1,189 @@
-#include<stdio.h> 
-#include<math.h> 
-#include<header.h>
+/* The following code uses the RSA algorithm to encrypt and decrypt a given string(message) */
 
-/*Check whether a given number is prime or not*/
-int checkPrime(int n)
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+
+/************************************************
+- Variables used within the RSA algorithm where:
+		p&q are the prime numbers
+		n is the modulus (product of p&q)
+		t is the totient
+- Declaration of arrays
+************************************************/
+int x, y, n, t, i, flag; 
+int e[50], d[50], temp[50], j,m[50], en[50];
+char msg[100]; 
+
+/* Checks to see whether the numbers chosen are prime or not */
+int prime(long int); 
+
+/* The functions used in the creation of the encryption key */
+void encryption_key(); 
+long int cd(long int); 
+
+/* The functions for encrypting and decrypting */
+void encrypt(); 
+void decrypt(); 
+
+int main()
 {
-	int i, j;
-	j = sqrt(n);
-	for (i=2; i<=j; i++)
-	{
-	if(n%i==0)
-		return 0;
-	}
-		
-
-/*finding the gcd*/
-int gcd(int a, int h)
-{
-	int temp;
-{
-    int temp;
-    while(1)
-    {
-        temp = a%h;
-        if(temp==0)
-        return h;
-        a = h;
-        h = temp;
-    }
-}
- 
-/*using the RSA algorithm*/
-
-int main ()
-{
-	int p;
-	int q;
-
-	printf("\nChoose two random prime numbers p&q: ");
-	scanf("%d %d",&p,&q); 
-
-/* calculating the product and the totient*/
-	
-	int n;
-	int phi;
-
-	n=p*q;
-	phi = (p-1)*(q-1);
-
-/* selecting the e value (public key) where e = encrypt */
-
-	int e;
-
-	printf("\nChoose an e value: ");
-	scanf("%d", &e);
-
-/*making sure e satisfies the condition of 1<e<phi*/
-	while (e<phi) 
+	/* This part checks whether the given numbers are prime
+       If they're not prime, not valid is displayed */
+	printf("\nPlease enter the first prime\n");
+	scanf("%d", &x); 
+	flag = prime(x);
+		if(flag == 0)
 		{
-		    if (gcd(e,phi)==1) 
-		        break; 
-		    else
-		        e++; 
+			printf("\nNot valid\n");
+			exit(0);
 		}
 
-/*selecting d value (private key) where d = decrypt*/
+	printf("\nPlease enter the second prime\n");
+	scanf("%d", &y); 
+	flag = prime(y);
+		if(flag == 0 || x == y)
+		{
+			printf("\nNot valid\n");
+			exit(0);
+		}
 
-	int d;
+	/* Calculates the modulus and totient (phi) */
+	printf("\nEnter the message to be encrypted\n");
+	scanf("%s",msg); 
+		for(i = 0; msg[i] != '\0'; i++) 
+			m[i] = msg[i];
 
-	printf("\nChoose a d value: ");
-	scanf("%d", &e);
+			n = x * y; 
+			t = (x-1) * (y-1); 
 
-/*checking to see if d satisfies the condition of d*e = 1+(k*phi)*/
-
-	int k; /*k is a constant*/
-
-	printf("Choose k: ");
-	scanf("%d", &k);
-
-
-  /* don't know */
-
-void Encrypt();
-{
-	int msg;
-
-	printf("\nMessage to be encrypted: ");
-	scanf("%d", &msg);
-
-	double c = pow(msg,e);
-	c = fmod (c, n);
-	printf("\nData that's encrypted: %lf, c);
+	/* Creation of the encryption key */
+	encryption_key(); 
+	printf("\nValues that e and d could be\n");
+		for(i = 0; i < j-1; i++)
+			printf("\n%d\t%d", e[i], d[i]);
+				encrypt();
+				decrypt();
+		return 0;
 }
 
-void Decrypt();
+/* Checking for primes once again */
+int prime(long int pr) 
 {
-	double m = pow(c,d);
-	m = fmod(m, n);
-	printf("\nData decrypted (Original Message): %lf, m);
+	int i;
+	j = sqrt(pr);
+	for(i = 2; i <= j; i++)
+		{
+			if(pr % i == 0)
+			return 0;
+		}
+	return 1;
+}
 
-int getPublicKeys();
+/* - Following is the function to create the encryption key 
+     where e = encrypt and d = decrypt.
+   - Possible values for the integers (e&d) are shown in the arrays
+   - k is just an integer  */
 
-int getPrivateKeys();
+void encryption_key()
+{
+	int k;
+	k = 0;
+
+	for(i = 2; i < t; i++) 
+	{
+		if(t % i == 0)
+		continue;
+		flag = prime(i);
+
+		if(flag == 1 && i != x && i != y)
+		{
+			e[k] = i;
+			flag = cd(e[k]); 
+/* Selecting the private key d */
+			if(flag > 0)
+			{
+				d[k] = flag;
+				k++;
+			}
+
+			if(k == 99)
+			break;
+		}
+	}
+}
+
+/* Showing that d satisfies part of the RSA algorithm d*e = 1+k*t */
+long int cd(long int a)
+{
+	long int k = 1;
+	while(1)
+	{
+		k = k + t;
+		if(k % a == 0)
+		return(k / a);
+	}
+}
+
+/* The function where the message is encrypted
+   Satisfies c=(msg^e)%n */
+
+void encrypt()
+{
+	long int pt, ct, key = e[0], k, len;
+	i = 0;
+	len = strlen(msg);
+	while(i != len)
+	{
+		pt = m[i];
+		pt = pt - 96;
+		k = 1;
+
+		for(j = 0; j < key; j++)
+		{
+			k = k * pt;
+			k = k % n;
+		}
+
+		temp[i] = k;
+		ct = k + 96;
+		en[i] = ct;
+		i++;
+	}
+
+	en[i] = -1;
+	printf("\n\nThe message encrypted:\n");
+	for(i = 0; en[i] != -1; i++)
+		printf("%c", en[i]); 
+}
+
+/*The function where the message is decrypted 
+  Satisfies m=(c^d)%n */
+void decrypt()
+{
+	long int pt, ct, key = d[0], k;
+	i = 0;
+	while(en[i] != -1)
+		{
+			ct = temp[i];
+			k = 1;
+			for(j = 0; j < key; j++) 
+			{
+				k = k * ct;
+				k = k % n;
+			}
+
+			pt = k + 96;
+			m[i] = pt;
+			i++;
+		}
+
+		m[i] = -1;
+		printf("\n\nThe message decrypted:\n");
+		for(i = 0; m[i] != -1; i++)
+			printf("%c", m[i]); 
+		printf("\n");
+}
+
+/* End of RSA implementation */
