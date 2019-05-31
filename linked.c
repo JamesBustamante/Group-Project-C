@@ -4,6 +4,7 @@
 #include <string.h> /* strcpy, strcmp, strlen, strcat */
 #include <stdlib.h> /* malloc */
 #include <math.h>
+#include "RSA.h"
 double sqroot(double square);
 double sqroot(double square)
 {
@@ -16,7 +17,7 @@ double sqroot(double square)
     return root;
 }
 
-int prime(long int);
+
 int prime(long int pr)
 {
     int i;
@@ -30,7 +31,7 @@ int prime(long int pr)
 }
 #include "header.h"
 #include "mergeSort.h"
-#include "RSA.h"
+
 #include "searchLinkedList.h"
 int main()
 {
@@ -226,32 +227,45 @@ void print_search_sort(struct node **node)
            "2. Sort by username\n"
            "3. Search by title\n"
            "4. Search by username\n"
+           "5. View entire Linked List\n"
            "Enter number between 1-4\n");
     scanf(" %s", selection);
-    while (1)
+    int repeat = 1;
+    while (repeat == 1)
     {
         switch (*selection)
         {
         case '1':
             mergeSortMainTitle(node);
+            repeat = 0;
             break;
         case '2':
             mergeSortMainUsername(node);
+            repeat = 0;
             break;
         case '3':
             printf("\n"
                    "Enter title to search for\n");
             scanf(" %s", target);
-            searchTitle(node, target);
+            binarySearchTitle(node, target);
+            repeat = 0;
             break;
         case '4':
             printf("\n"
                    "Enter username to search for\n");
             scanf(" %s", target);
-            searchUsername(node, target);
+            binarySearchUsername(node, target);
+            repeat = 0;
+            break;
+        case '5':
+            printf("\n"
+                   "Heres the entire list\n");
+            print(*node);
+            repeat = 0;
             break;
         default:
             printf("Invalid choice\n");
+            repeat = 0;
             break;
         }
     }
