@@ -35,10 +35,45 @@ int prime(long int pr)
 #include "searchLinkedList.h"
 int main()
 {
+    	x = 3;
+	flag = prime(x);
+
+	y = 7;
+	flag = prime(y);
+    
+		n = x * y;
+		t = (x - 1) * (y - 1);
+        char newstring[200] = "";
+        strcpy(msg, newstring);
+
+        for (i = 0; msg[i] != '\0'; i++)
+		m[i] = msg[i];
+
+            encryption_key();
+			encrypt();
+			decrypt();
+
     struct node *head = NULL;
 
     selection(&head);
     return 0;
+}
+
+/* Insert log in details into the linked list */
+void insertDetailsDECRYPT(struct node **node, int *title, char *username, char *password)
+{
+    /*creates the node with the contents of the struct to add to the linked list */
+    struct node *insertNode = (struct node *)malloc(sizeof(struct node));
+    char carray[sizeof(*title)];
+
+    memcpy(title, carray, sizeof(*title));
+    insertNode->title = carray; /*adds in the contents based upon what was passed in*/
+    insertNode->username = username;
+    insertNode->password = password;
+
+    insertNode->next = (*node);
+    /*append node to the create linked list that already exists*/
+    (*node) = insertNode;
 }
 
 /* Insert log in details into the linked list */
@@ -123,14 +158,22 @@ void saveLinkedList(struct node *node)
         int count = 0;
         while (node != NULL)
         {
-            fprintf(fp, "%d\n", ++count);
+            fprintf(fp, "%d\n", ++count);  
             fprintf(fp, "%s\n", node->title);
-            /*msg = "node->title";*/
-            /*encryption_key();
-            encrypt();
-            decrypt();*/
             fprintf(fp, "%s\n", node->username);
-            fprintf(fp, "%s\n", node->password);
+            char* newstring =  node->password;
+        strcpy(msg, newstring);
+
+        for (i = 0; msg[i] != '\0'; i++)
+		m[i] = msg[i];
+
+            encryption_key();
+			encrypt();
+			/*decrypt();*/
+            /*strcpy(newstring, msg);*/
+            for(i = 0; en[i] != -1; i++)
+		fprintf(fp,"%c", en[i]);
+            fprintf(fp, "\n");
             node = node->next; /* goes to the next node */
         }
         fclose(fp); /*close the file*/
@@ -196,6 +239,19 @@ void LoadContentsInLinkedList(struct node **node)
             char *password = malloc(200);
             stepCount++; /* increase the amount of steps we've made*/
             fscanf(fp, "%d\n%s\n%s\n%s\n", &count, title, username, password); /* scan an entire entry*/
+            char* dnewstring =  password;
+        strcpy(msg, dnewstring);
+
+        printf("%s",msg);
+        for (i = 0; msg[i] != '\0'; i++) {
+		    m[i] = msg[i];
+        }
+
+            /*encryption_key();*/
+			/*encrypt();*/
+			decrypt();
+            /*strcpy(newstring, msg);*/
+            /*printf("%c\n",*m);*/
             insertDetails(node, title, username, password); /* insert those details into linked list*/
             title = ""; 
             username = "";
@@ -228,7 +284,7 @@ void print_search_sort(struct node **node)
            "3. Search by title\n"
            "4. Search by username\n"
            "5. View entire Linked List\n"
-           "Enter number between 1-4\n");
+           "Enter number between 1-5\n");
     scanf(" %s", selection);
     int repeat = 1;
     while (repeat == 1)
