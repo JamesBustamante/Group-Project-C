@@ -14,7 +14,7 @@ void searchTitle (struct node** headReference, char* target){
 	} 
 	
 	/* Iterate through list. */
-	while (currNode->next == NULL){
+	while (currNode->next != NULL){
 		/* Strstr looks for substring target in string node->title. */
 		/* If there's a match, print the node that matches.         */
 		if(strstr(currNode->title, target) != NULL ){
@@ -44,7 +44,7 @@ void searchUsername (struct node** headReference, char* target){
 	} 
 	
 	/* Iterate through list. */
-	while (currNode->next == NULL){
+	while (currNode->next != NULL){
 		/* Strstr looks for substring target in string node->title. */
 		/* If there's a match, print the node that matches.         */
 		printf("List is empty\n");
