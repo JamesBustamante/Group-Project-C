@@ -30,7 +30,7 @@ void Compress ();
 void Decompress ();
 
 /********************************/
-/* Data Structure - Linked List */
+/* Data Structure - Linked List (JAMES BUSTAMANTE -12900926) */
 /********************************/
 struct node
 { /* Setup struct for linked list */
@@ -42,6 +42,7 @@ struct node
 
 /*typedef struct node *head;*/
 
+/* the read linked list section of the menu where you can search or sort or view */
 void print_search_sort(struct node **node);
 
 /* Insert log in details into the linked list */
@@ -64,8 +65,10 @@ void LoadContentsInLinkedList(struct node **node);
 /* Reads input from the user to add to linked list */
 char *readWord();
 
+/* used to ask whether user wants add to the linked list or not */
 struct node ** tempMenu(struct node **node);
 
+/* menu select for the user */
 void selection(struct node **node);
 
 /* This function prints the initial menu with all instructions on how to use */
