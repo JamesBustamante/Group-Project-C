@@ -71,6 +71,8 @@ struct node ** tempMenu(struct node **node);
 /* menu select for the user */
 void selection(struct node **node);
 
+void insertDetailsDECRYPT(struct node **node, int *title, char *username, char *password);
+
 /* This function prints the initial menu with all instructions on how to use */
 void print_menu(void);
 /********************************/
