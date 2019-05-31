@@ -1,10 +1,5 @@
 /* The following code uses the RSA algorithm to encrypt and decrypt a given string(message) */
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-#include<string.h>
-
 /************************************************
 - Variables used within the RSA algorithm where:
 		p&q are the prime numbers
@@ -12,12 +7,14 @@
 		t is the totient
 - Declaration of arrays
 ************************************************/
+
+
+/* Checks to see whether the numbers chosen are prime or not */
 int x, y, n, t, i, flag; 
 int e[50], d[50], temp[50], j,m[50], en[50];
 char msg[100]; 
-
-/* Checks to see whether the numbers chosen are prime or not */
-int prime(long int); 
+char* encrypted;
+char* decrypted;
 
 /* The functions used in the creation of the encryption key */
 void encryption_key(); 
@@ -26,11 +23,10 @@ long int cd(long int);
 /* The functions for encrypting and decrypting */
 void encrypt(); 
 void decrypt(); 
-
+/*
 int main()
 {
-	/* This part checks whether the given numbers are prime
-       If they're not prime, not valid is displayed */
+
 	printf("\nPlease enter the first prime\n");
 	scanf("%d", &x); 
 	flag = prime(x);
@@ -48,44 +44,34 @@ int main()
 			printf("\nNot valid\n");
 			exit(0);
 		}
-
+*/
 	/* Calculates the modulus and totient (phi) */
-	printf("\nEnter the message to be encrypted\n");
+	/*printf("\nEnter the message to be encrypted\n");
 	scanf("%s",msg); 
 		for(i = 0; msg[i] != '\0'; i++) 
 			m[i] = msg[i];
 
 			n = x * y; 
-			t = (x-1) * (y-1); 
+			t = (x-1) * (y-1); */
 
 	/* Creation of the encryption key */
-	encryption_key(); 
+	/*encryption_key(); 
 	printf("\nValues that e and d could be\n");
 		for(i = 0; i < j-1; i++)
 			printf("\n%d\t%d", e[i], d[i]);
 				encrypt();
 				decrypt();
 		return 0;
-}
+}*/
 
 /* Checking for primes once again */
-int prime(long int pr) 
-{
-	int i;
-	j = sqrt(pr);
-	for(i = 2; i <= j; i++)
-		{
-			if(pr % i == 0)
-			return 0;
-		}
-	return 1;
-}
+
 
 /* - Following is the function to create the encryption key 
      where e = encrypt and d = decrypt.
    - Possible values for the integers (e&d) are shown in the arrays
    - k is just an integer  */
-
+int prime(long int);
 void encryption_key()
 {
 	int k;
@@ -153,9 +139,11 @@ void encrypt()
 	}
 
 	en[i] = -1;
+	/*
 	printf("\n\nThe message encrypted:\n");
 	for(i = 0; en[i] != -1; i++)
-		printf("%c", en[i]); 
+		printf("%c", en[i]);*/
+
 }
 
 /*The function where the message is decrypted 
@@ -180,9 +168,9 @@ void decrypt()
 		}
 
 		m[i] = -1;
-		printf("\n\nThe message decrypted:\n");
+		/*printf("\n\nThe message decrypted:\n");*/
 		for(i = 0; m[i] != -1; i++)
-			printf("%c", m[i]); 
+			printf("%c", m[i]);
 		printf("\n");
 }
 
