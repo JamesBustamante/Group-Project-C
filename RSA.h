@@ -2,9 +2,9 @@
 
 /************************************************
 - Variables used within the RSA algorithm where:
-		p&q are the prime numbers
-		n is the modulus (product of p&q)
-		t is the totient
+		x&y are the prime numbers
+		n is the modulus (product of x&y)
+		t is the totient (phi)
 - Declaration of arrays
 ************************************************/
 
@@ -45,14 +45,14 @@ int main()
 			exit(0);
 		}
 */
-	/* Calculates the modulus and totient (phi) */
+	/* Calculates the modulus and totient (t) */
 	/*printf("\nEnter the message to be encrypted\n");
 	scanf("%s",msg); 
 		for(i = 0; msg[i] != '\0'; i++) 
 			m[i] = msg[i];
 
-			n = x * y; 
-			t = (x-1) * (y-1); */
+			n = x*y; 
+			t = (x-1)*(y-1); */
 
 	/* Creation of the encryption key */
 	/*encryption_key(); 
