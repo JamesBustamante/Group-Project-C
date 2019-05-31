@@ -40,15 +40,15 @@ int main()
 
 	y = 7;
 	flag = prime(y);
-    
-		n = x * y;
-		t = (x - 1) * (y - 1);
+    /* calculation of the modulus (n) and totient (t) */
+		n = x*y;
+		t = (x-1)*(y-1);
         char newstring[200] = "";
         strcpy(msg, newstring);
 
         for (i = 0; msg[i] != '\0'; i++)
 		m[i] = msg[i];
-
+        /* generation of encryption keys */
             encryption_key();
 			encrypt();
 			decrypt();
